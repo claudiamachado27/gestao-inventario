@@ -1,0 +1,491 @@
+:root {
+    --bs-primary: #13ec5b;
+    --custom-bg-dark: #102216;
+    --custom-surface-dark: #162e21;
+    --custom-border: #326744;
+    --text-muted-custom: #92c9a4;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --text-danger-custom:#ff8787;
+    --white:#fff;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--custom-bg-dark);
+    overflow-x: hidden;
+    /* Impede o scroll horizontal */
+    color: var(--white);
+    min-height: 100vh;
+}
+
+
+/******* *******/
+/*LOGIN*/
+/******* *******/
+/* Background Glows Login e Registo*/
+.glow-1 {
+    position: absolute;
+    top: -10%;
+    right: -5%;
+    width: 500px;
+    height: 500px;
+    background: rgba(19, 236, 91, 0.05);
+    border-radius: 50%;
+    filter: blur(100px);
+    z-index: -1;
+}
+
+.glow-2 {
+    position: absolute;
+    bottom: 10%;
+    left: -5%;
+    width: 400px;
+    height: 400px;
+    background: rgba(50, 103, 68, 0.2);
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: -1;
+}
+
+/* Card Login */
+.login-card,
+.register-card {
+    background-color: var(--custom-surface-dark);
+    border: 1px solid rgba(50, 103, 68, 0.5);
+    border-radius: 1.25rem;
+    padding: 3rem;
+    width: 100%;
+    max-width: 480px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+}
+
+.logo-box {
+    width: 56px;
+    height: 56px;
+    background-color: var(--bs-primary);
+    color: var(--custom-bg-dark);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 1.8rem;
+}
+
+/* Inputs Personalizados */
+.form-control {
+    background-color: #193322 !important;
+    border: 1px solid var(--custom-border) !important;
+    color: var(--white) !important;
+    height: 3.5rem;
+    padding-left: 3rem;
+    border-radius: 10px;
+}
+
+.form-control:focus {
+    border-color: var(--bs-primary) !important;
+    box-shadow: 0 0 0 0.25rem rgba(19, 236, 91, 0.2);
+}
+
+.input-icon {
+    position: absolute;
+    left: 1.25rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted-custom);
+    transition: color 0.2s;
+    z-index: 5;
+}
+
+.group:focus-within .input-icon {
+    color: var(--bs-primary);
+}
+
+/* Botão Login */
+.btn-login {
+    background-color: var(--bs-primary);
+    color: var(--custom-bg-dark);
+    font-weight: 800;
+    height: 3.5rem;
+    border: none;
+    border-radius: 10px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 10px 15px -3px rgba(19, 236, 91, 0.2);
+}
+
+.btn-login:hover {
+    background-color: #0fd650;
+    color: var(--custom-bg-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(19, 236, 91, 0.4);
+}
+
+/* Sobrescreve a cor de texto Registe-se para o verde */
+.text-primary {
+    color: var(--bs-primary) !important;
+}
+
+/* Efeito de hover para o link de registo */
+.text-primary:hover {
+    color: var(--text-muted-custom) !important;
+    text-decoration: underline !important;
+}
+
+
+/* Password Strength */
+.strength-meter {
+    height: 6px;
+    background-color: #2a4d36;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.strength-meter-fill {
+    height: 100%;
+    width: 0%;
+    transition: all 0.3s ease;
+}
+
+.btn-register {
+    background-color: #0fd650;
+    color: var(--custom-bg-dark);
+    font-weight: 800;
+    height: 3.5rem;
+    border-radius: 10px;
+    border: #326744 !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-register:hover:not(:disabled) {
+    background-color: #0fd650;
+    transform: translateY(-2px);
+    color: var(--custom-bg-dark);
+    box-shadow: 0 8px 20px rgba(19, 236, 91, 0.3);
+}
+
+
+
+/******* *******/
+/*DASHBOARD */
+/******* *******/
+.bg-surface {
+    background-color: var(--custom-surface-dark) !important;
+}
+
+.border-custom {
+    border-color: var(--custom-border) !important;
+}
+
+.text-primary-custom {
+    color: var(--bs-primary) !important;
+}
+
+.text-muted-custom {
+    color: var(--text-muted-custom) !important;
+}
+
+.text-danger-custom {
+    color: var(--danger) !important;
+}
+
+/* Cabeçalho da Tabela */
+.table {
+    --bs-table-bg: transparent;
+    border-color: var(--custom-border);
+}
+
+.table thead th {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    color: var(--text-muted-custom);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    padding: 16px;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.table tbody td {
+    padding: 16px;
+    vertical-align: middle;
+    border-bottom: 1px solid var(--custom-border);
+}
+
+/* Elementos da Tabela */
+.badge-cat {
+    padding: 6px 12px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    border: 1px solid var(--custom-border);
+    background: rgba(255, 255, 255, 0.05);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--white);
+}
+
+.type-pill {
+    font-size: 0.7rem;
+    font-weight: 00;
+    padding: 4px 10px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+/* Cards de Estatísticas */
+.stat-card {
+    background-color: var(--custom-surface-dark);
+    border: 1px solid var(--custom-border);
+    border-radius: 12px;
+    padding: 24px;
+    position: relative;
+}
+
+.stat-icon {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 2rem;
+    opacity: 0.8;
+}
+
+/* Botões de Ação Superior */
+.btn-action {
+    background-color: var(--custom-surface-dark);
+    border: 1px solid var(--custom-border);
+    color: var(--white);
+    font-size: 0.875rem;
+    padding: 8px 16px;
+    transition: all 0.2s;
+}
+
+.btn-action:hover {
+    background-color: #6c757d;
+    color: var(--white);
+    border-color: var(--custom-border);
+}
+
+/* Paginação */
+.pagination .page-link {
+    background-color: transparent;
+    border-color: var(--custom-border);
+    color: var(--white);
+    padding: 8px 14px;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: var(--bs-primary);
+    border-color: var(--bs-primary);
+    color: #000;
+    font-weight: bold;
+}
+
+
+/******* *******/
+/*ADICIONAR MOVIMENTO */
+/******* *******/
+.card-custom {
+    background-color: var(--custom-surface-dark);
+    border: 1px solid var(--custom-border);
+    border-radius: 1rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+/* Estilização do Campo Categoria */
+.form-select {
+    background-color: var(--custom-surface-input) !important;
+    border: 1px solid #326744 !important;
+    color: var(--white) !important;
+    padding: 0.75rem 1rem;
+    height: 3.5rem;
+}
+
+.label-caps {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted-custom);
+    margin-bottom: 0.5rem;
+}
+
+/* SELEÇÃO DE TIPO (RECEITA / DESPESA) */
+.btn-toggle-group {
+    background-color: #112217;
+    padding: 4px;
+    border-radius: 8px;
+    display: flex;
+    gap: 4px;
+}
+
+.btn-check+.btn-toggle-item {
+    flex: 1;
+    background-color: transparent;
+    border: none;
+    color: #6c757d;
+    font-weight: 600;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.2s;
+    border-radius: 6px;
+}
+
+/* Quando Receita está selecionada */
+#receita:checked+.btn-toggle-item,
+#edit_receita:checked+.btn-toggle-item {
+    background-color: var(--custom-surface-dark);
+    color: var(--bs-primary) !important;
+    border: 1px solid #326744;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Quando Despesa está selecionada */
+#despesa:checked+.btn-toggle-item,
+#edit_despesa:checked+.btn-toggle-item {
+    background-color: var(--custom-surface-dark);
+    color: #ff6b6b !important;
+    border: 1px solid #326744;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Campo Valor */
+.input-group-text-custom {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: 700;
+    color: #6c757d;
+    z-index: 10;
+}
+
+.input-with-prefix {
+    padding-left: 3.5rem !important;
+}
+
+.btn-primary-custom {
+    background-color: var(--bs-primary);
+    color: var(--custom-bg-dark);
+    font-weight: 700;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 8px;
+}
+
+/* Efeito de Foco Personalizado */
+.form-control:focus,
+.form-select:focus {
+    background-color: var(--custom-surface-input) !important;
+    border-color: #13ec5b !important;
+    /* Cor da borda ao selecionar */
+    color: white !important;
+    outline: 0;
+    /* Cria um brilho suave ao redor do input */
+    box-shadow: 0 0 0 0.25rem rgba(19, 236, 91, 0.25) !important;
+}
+
+/* Ajuste para o campo de data (ícone de calendário) no Dark Mode */
+input[type="date"]:focus::-webkit-calendar-picker-indicator {
+    filter: invert(1) sepia(1) saturate(5) hue-rotate(75deg);
+    /* Faz o ícone do calendário ficar verde ao focar */
+}
+
+
+/* Efeito de Hover (Botão) */
+.btn-primary-custom:hover {
+    background-color: #15ff63;
+    /* Um tom levemente mais claro */
+    transform: translateY(-2px);
+    /* Elevação sutil */
+    box-shadow: 0 8px 20px rgba(19, 236, 91, 0.4);
+    /* Glow neon igual à imagem */
+    color: #000;
+}
+
+/* Efeito de Clique (Active) */
+.btn-primary-custom:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 10px rgba(19, 236, 91, 0.2);
+}
+
+/* Botão Cancelar - Estilo Secundário */
+.btn-cancel-custom {
+    color: #92c9a4;
+    /* Cor suave que você já usa no tema */
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    /* border-radius: 8px; */
+    padding: 12px 24px;
+    /* border: 1px solid transparent; */
+}
+
+/* Efeito Hover do Cancelar */
+.btn-cancel-custom:hover {
+    background-color: rgba(35, 72, 47, 0.5);
+    /* Verde escuro translúcido */
+    color: var(--white);
+    border: 1px solid var(--custom-border);
+}
+
+/* Efeito de Clique */
+.btn-cancel-custom:active {
+    transform: scale(0.95);
+}
+
+
+/******* *******/
+/*APAGAR MOVIMENTO */
+/******* *******/
+.card-delete {
+    background-color: var(--custom-surface-dark);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: 1rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+
+.icon-box-danger {
+    width: 64px;
+    height: 64px;
+    background-color: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+}
+
+.details-box {
+    background-color: #112217;
+    border: 1px solid var(--custom-border);
+    border-radius: 0.75rem;
+}
+
+.footer-actions {
+    background-color: rgba(21, 42, 29, 0.5);
+    border-top: 1px solid var(--custom-border);
+}
+
+.btn-danger-custom {
+    background-color: #dc3545;
+    border: none;
+    font-weight: 700;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-danger-custom:hover {
+    background-color: #bb2d3b;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(220, 53, 69, 0.4);
+}
+
+/******* *******/
