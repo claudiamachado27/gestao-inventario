@@ -1,6 +1,6 @@
 @extends('layout.guest')
 
-@section('title', 'Login - Finanças em Dia')
+@section('title', 'Recuperar Senha - Finanças em Dia')
 
 @section('content')
     <div class="login-card">
@@ -9,13 +9,13 @@
             <div class="logo-box">
                 <img src="{{ asset('images/icon.png') }}" alt="Icon">
             </div>
-            <h1 class="fs-4 fw-black text-dark mb-1">Bem-vindo(a)</h1>
+            <h1 class="fs-4 fw-black text-dark mb-1">Recuperar Senha</h1>
             <p class="small mb-0" style="color: var(--text-muted-custom);">
-                Gestão do Inventário de Alice Teixeira
+                Insira o seu e-mail para recuperar a senha
             </p>
         </div>
 
-        <form method="POST" action="{{ route('login') }}">
+        <form method="POST" action="#">
             @csrf
             <div class="mb-4">
                 <label class="form-label small fw-bold text-uppercase opacity-75">E-mail</label>
@@ -31,32 +31,15 @@
                 @enderror
             </div>
 
-            <div class="mb-5">
-                <div class="d-flex justify-content-between align-items-center">
-                    <label class="form-label small fw-bold text-uppercase opacity-75">Senha</label>
-                </div>
-                <div class="position-relative group">
-                    <i class="bi bi-lock input-icon"></i>
-                    <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
-                        placeholder="********" required>
-                </div>
-                @error('password')
-                    <div class="small mt-1" style="color: var(--text-danger-custom);">
-                        <i class="bi bi-exclamation-circle me-1"></i>{{ $message }}
-                    </div>
-                @enderror
-            </div>
-
             <button type="submit" class="btn btn-login w-100">
-                Entrar
+                Enviar link de recuperação
             </button>
         </form>
 
         <div class="mt-4 text-center">
             <p class="small" style="color: var(--text-muted-custom);">
-                Esqueceu a senha?
-                <a href="{{ route('password.request') }}" class="text-primary fw-bold text-decoration-none ms-1">Clique
-                    aqui</a>
+                Lembrou-se da senha?
+                <a href="{{ route('login') }}" class="text-primary fw-bold text-decoration-none ms-1">Voltar ao Login</a>
             </p>
         </div>
     </div>

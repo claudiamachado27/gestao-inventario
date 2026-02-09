@@ -3,10 +3,19 @@
 @section('title', 'Finanças em Dia')
 
 @section('content')
+    @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm mb-4" role="alert"
+            style="background-color: rgba(59, 130, 246, 0.1); color: var(--bs-primary);">
+            <i class="bi bi-check-circle-fill me-2"></i>
+            {{ session('success') }}
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+
     <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-end mb-4 gap-3">
         <div>
             <h2 class="display-6 fw-black mb-1">Todas as Movimentações</h2>
-            <p class="text-muted-custom small mb-0">Gerencie suas receitas e despesas.</p>
+            <p class="text-muted-custom small mb-0">Gestão de receitas e despesas do Inventário de Alice Teixeira.</p>
         </div>
         <div class="d-flex gap-2">
             @if (Auth::user()->role === 'admin')
@@ -32,7 +41,8 @@
         </div>
     </div>
 
-    <form action="{{ route('dashboard') }}" method="GET" class="row g-3 mb-4 align-items-end">
+    <form action="{{ route('dashboard') }}" method="GET" id="filter-form" class="row g-3 mb-4 align-items-end">
+        <input type="hidden" name="tipo" id="tipo-filter" value="{{ request('tipo') }}">
         <div class="col-auto">
             <label class="small fw-bold mb-2 d-block text-muted-custom">Mês</label>
             <select name="month" class="form-select bg-surface border-custom text-white"
@@ -64,41 +74,51 @@
             <select name="year" class="form-select bg-surface border-custom text-white"
                 style="width: 110px; font-size: 0.9rem;" onchange="this.form.submit()">
                 <option value="">Todos</option>
-                @for ($y = 2024; $y <= 2026; $y++)
+                @for ($y = 2026; $y <= $endYear; $y++)
                     <option value="{{ $y }}" @selected(request('year') == $y)>{{ $y }}</option>
                 @endfor
             </select>
         </div>
         <div class="col d-flex justify-content-end gap-2 mb-1">
-            <button type="button" id="filter-all"
-                class="btn btn-light rounded-pill px-4 fw-bold btn-sm filter-btn active">Todas</button>
-            <button type="button" id="filter-receitas"
-                class="btn btn-green-solid rounded-pill px-4 btn-sm filter-btn">Receitas</button>
-            <button type="button" id="filter-despesas"
-                class="btn btn-green-solid rounded-pill px-4 btn-sm filter-btn">Despesas</button>
+            <button type="button" onclick="applyTypeFilter('')"
+                class="btn rounded-pill px-4 btn-sm {{ !request('tipo') ? 'btn-light fw-bold active' : 'btn-green-solid' }}">Todas</button>
+            <button type="button" onclick="applyTypeFilter('receita')"
+                class="btn rounded-pill px-4 btn-sm {{ request('tipo') == 'receita' ? 'btn-light fw-bold active' : 'btn-green-solid' }}">Receitas</button>
+            <button type="button" onclick="applyTypeFilter('despesa')"
+                class="btn rounded-pill px-4 btn-sm {{ request('tipo') == 'despesa' ? 'btn-light fw-bold active' : 'btn-green-solid' }}">Despesas</button>
         </div>
     </form>
 
     <div class="row g-3 mb-5">
-        <div class="col-md-4">
+        @if (request()->filled('month') || request()->filled('year'))
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <i class="bi bi-calendar-check stat-icon text-info"></i>
+                    <p class="small text-uppercase fw-bold text-muted-custom mb-1">Saldo Anterior</p>
+                    <h3 class="fw-bold mb-0">R$ {{ number_format($saldoAnterior, 2, ',', '.') }}</h3>
+                </div>
+            </div>
+        @endif
+
+        <div class="{{ request()->filled('month') || request()->filled('year') ? 'col-md-3' : 'col-md-4' }}">
             <div class="stat-card">
-                <i class="bi bi-graph-up stat-icon text-primary-custom"></i>
+                <i class="bi bi-graph-up stat-icon text-success-custom"></i>
                 <p class="small text-uppercase fw-bold text-muted-custom mb-1">Total Receitas</p>
-                <h3 class="fw-bold mb-0">{{ number_format($totalReceitas, 2, ',', '.') }} €</h3>
+                <h3 class="fw-bold mb-0 text-success-custom">R$ {{ number_format($totalReceitas, 2, ',', '.') }}</h3>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="{{ request()->filled('month') || request()->filled('year') ? 'col-md-3' : 'col-md-4' }}">
             <div class="stat-card">
                 <i class="bi bi-graph-down stat-icon text-danger-custom"></i>
                 <p class="small text-uppercase fw-bold text-muted-custom mb-1">Total Despesas</p>
-                <h3 class="fw-bold mb-0">{{ number_format($totalDespesas, 2, ',', '.') }} €</h3>
+                <h3 class="fw-bold mb-0 text-danger-custom">R$ {{ number_format($totalDespesas, 2, ',', '.') }}</h3>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="stat-card" style="background-color: rgba(19, 236, 91, 0.05);">
+        <div class="{{ request()->filled('month') || request()->filled('year') ? 'col-md-3' : 'col-md-4' }}">
+            <div class="stat-card" style="background-color: rgba(59, 130, 246, 0.05);">
                 <i class="bi bi-wallet2 stat-icon text-white"></i>
                 <p class="small text-uppercase fw-bold text-primary-custom mb-1">Saldo Atual</p>
-                <h3 class="fw-bold mb-0">{{ number_format($saldo, 2, ',', '.') }} €</h3>
+                <h3 class="fw-bold mb-0">R$ {{ number_format($saldo, 2, ',', '.') }}</h3>
             </div>
         </div>
     </div>
@@ -118,23 +138,24 @@
                 <tbody>
                     @forelse ($movements as $movement)
                         <tr class="movement-row" data-tipo="{{ $movement->tipo }}">
-                            <td class="ps-4 text-white">{{ $movement->data->format('d/m/y') }}</td>
-                            <td class="fw-bold text-white text-nowrap">{{ $movement->descricao }}</td>
+                            <td class="ps-4">{{ $movement->data->format('d/m/y') }}</td>
+                            <td class="fw-bold text-nowrap">{{ $movement->descricao }}</td>
                             <td><span class="badge-cat"><i
                                         class="bi {{ $movement->category ? $movement->category->icon : 'bi-question' }} {{ $movement->category ? $movement->category->color : '' }}"></i>
                                     {{ $movement->category ? $movement->category->nome : 'N/A' }}</span></td>
                             <td><span
-                                    class="type-pill {{ $movement->tipo == 'receita' ? 'text-primary-custom' : 'text-danger' }}"><i
+                                    class="type-pill {{ $movement->tipo == 'receita' ? 'text-success-custom' : 'text-danger' }}"><i
                                         class="bi bi-circle-fill" style="font-size: 0.4rem;"></i>
                                     {{ ucfirst($movement->tipo) }}</span></td>
                             <td
-                                class="text-end pe-4 fw-bold {{ $movement->tipo == 'receita' ? 'text-primary-custom' : 'text-danger' }} text-nowrap">
+                                class="text-end pe-4 fw-bold {{ $movement->tipo == 'receita' ? 'text-success-custom' : 'text-danger' }} text-nowrap">
                                 {{ $movement->tipo == 'receita' ? '+' : '-' }}
-                                {{ number_format($movement->valor, 2, ',', '.') }} €</td>
+                                R$ {{ number_format($movement->valor, 2, ',', '.') }}</td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5" class="text-center text-white py-4">Não existem movimentações neste período.
+                            <td colspan="5" class="text-center py-4">Não existem movimentações neste
+                                período.
                             </td>
                         </tr>
                     @endforelse
@@ -145,7 +166,7 @@
         {{-- Paginação --}}
         <div
             class="d-flex flex-column flex-sm-row justify-content-between align-items-center gap-3 p-4 bg-opacity-20 border-top border-custom">
-            <p class="small text-white mb-0">Mostrando <b
+            <p class="small mb-0">Mostrando <b
                     class="text-primary-custom">{{ $movements->firstItem() }}-{{ $movements->lastItem() }}</b> de <b
                     class="text-primary-custom">{{ $movements->total() }}</b> resultados</p>
             <nav>
@@ -186,38 +207,20 @@
 
     @push('scripts')
         <script>
+            function applyTypeFilter(tipo) {
+                document.getElementById('tipo-filter').value = tipo;
+                document.getElementById('filter-form').submit();
+            }
+
             document.addEventListener('DOMContentLoaded', function() {
-                const buttons = document.querySelectorAll('.filter-btn');
-                const rows = document.querySelectorAll('.movement-row');
-
-                buttons.forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        // Atualizar estado ativo dos botões
-                        buttons.forEach(b => {
-                            b.classList.remove('active', 'btn-light', 'fw-bold');
-                            b.classList.add('btn-green-solid');
-                        });
-                        this.classList.add('active', 'btn-light', 'fw-bold');
-                        this.classList.remove('btn-green-solid');
-
-                        const filter = this.id.replace('filter-', '');
-
-                        // Filtrar linhas
-                        rows.forEach(row => {
-                            if (filter === 'all') {
-                                row.style.display = '';
-                            } else {
-                                const targetTipo = (filter === 'receitas' ? 'receita' :
-                                    'despesa');
-                                if (row.dataset.tipo === targetTipo) {
-                                    row.style.display = '';
-                                } else {
-                                    row.style.display = 'none';
-                                }
-                            }
-                        });
-                    });
-                });
+                // Auto-hide success alert after 3 seconds
+                const alert = document.querySelector('.alert-success');
+                if (alert) {
+                    setTimeout(() => {
+                        const bsAlert = new bootstrap.Alert(alert);
+                        bsAlert.close();
+                    }, 3000);
+                }
             });
         </script>
     @endpush

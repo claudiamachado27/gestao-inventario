@@ -3,13 +3,13 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
 
-    <title>@yield('title', 'Finanças em Dia')</title>
-    <meta name="description" content="Sistema de gestão financeira pessoal de Rosa Machado">
+    <title>@yield('title', 'Gestão do Inventário de Alice Teixeira')</title>
+    <meta name="description" content="Sistema de Gestão de receitas e despesas do Inventário de Alice Teixeira">
 
-    <link href="{{ asset('images/icon.svg') }}" rel="icon" type="image/svg+xml">
-    <link rel="shortcut icon" href="{{ asset('images/icon.svg') }}">
+    <link href="{{ asset('images/icon.png') }}" rel="icon" type="image/png">
+    <link rel="shortcut icon" href="{{ asset('images/icon.png') }}">
     <!--ícone quando salvar o site no ecrã inicial do telemóvel-->
-    <link rel="apple-touch-icon" href="{{ asset('images/icon.svg') }}">
+    <link rel="apple-touch-icon" href="{{ asset('images/icon.png') }}">
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">

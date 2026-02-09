@@ -67,14 +67,15 @@ class MovementController extends Controller
     public function edit(Request $request)
     {
         $movements = Movement::orderBy('data', 'desc')->get();
-        $categories = \App\Models\Category::all();
+        $categories = \App\Models\Category::orderBy('nome')->get();
         $selectedMovement = null;
 
         if ($request->filled('id')) {
             $selectedMovement = Movement::find($request->id);
         }
 
-        return view('movements.edit', compact('movements', 'categories', 'selectedMovement'));
+        $allMovements = $movements;
+        return view('movements.edit', compact('movements', 'allMovements', 'categories', 'selectedMovement'));
     }
 
     /**

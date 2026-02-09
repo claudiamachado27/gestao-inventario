@@ -14,9 +14,8 @@ Route::post('/storeuser', [UserController::class, 'storeUser'])->name("users.sto
 //********ROTA PARA PÁGINAS LOGIN E REGISTO************
 Route::middleware('guest')->group(function () {
     Route::get('/', [AuthController::class, 'showLogin'])->name('login');//rota para página de login
-    Route::post('/', [AuthController::class, 'login']); // rota para login
-    Route::get('/registo', [AuthController::class, 'showRegister'])->name('register'); // rota para página de registo
-    Route::post('/registo', [AuthController::class, 'register']); // rota para registo
+    Route::post('/', [AuthController::class, 'login']); // rota para guardar login
+    Route::get('/esqueceu-senha', [AuthController::class, 'showForgetPassword'])->name('password.request'); // rota para página de esquecer senha
 });
 
 //********ROTA PARA LOGOUT************//

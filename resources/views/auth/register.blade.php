@@ -6,7 +6,7 @@
 <div class="register-card container">
     <div class="text-center mb-4">
         <div class="logo-box">
-            <img src="{{ asset('images/icon.svg') }}" alt="Icon">
+            <img src="{{ asset('images/icon.png') }}" alt="Icon">
         </div>
         <h1 class="fs-4 fw-black text-white mb-1">Crie sua conta</h1>
         <p class="small mb-0" style="color: var(--text-muted-custom);">E começe a gerenciar suas finanças de forma eficiente</p>

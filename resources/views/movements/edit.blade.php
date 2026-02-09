@@ -1,10 +1,10 @@
 <!-- Modal Editar Movimento -->
 <div class="modal fade" id="editMovementModal" tabindex="-1" aria-labelledby="editMovementModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content bg-surface border-custom text-white" style="border-radius: 1rem;">
+        <div class="modal-content bg-surface border-custom" style="border-radius: 1rem;">
             <div class="modal-header border-bottom border-custom">
                 <h1 class="modal-title fs-5 fw-bold" id="editMovementModalLabel">Editar Movimento</h1>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body p-4 p-md-5">
                 <div class="mb-4">
@@ -12,10 +12,11 @@
                     <div class="position-relative">
                         <input type="search" class="form-control" id="editMovementSearch" name="movement_search_text"
                             placeholder="Procure por descrição ou valor..." list="movementsList" autocomplete="off">
-                        <i class="bi bi-search position-absolute top-50 end-0 translate-middle-y pe-3 text-secondary"></i>
+                        <i
+                            class="bi bi-search position-absolute top-50 end-0 translate-middle-y pe-3 text-secondary"></i>
                         <datalist id="movementsList">
-                            @foreach($movements as $m)
-                                <option value="{{ $m->descricao }} - {{ number_format($m->valor, 2, ',', '.') }}€">
+                            @foreach ($allMovements ?? $movements as $m)
+                                <option value="{{ $m->descricao }} - R$ {{ number_format($m->valor, 2, ',', '.') }}">
                             @endforeach
                         </datalist>
                     </div>
@@ -30,14 +31,18 @@
                     <div class="mb-4 {{ !$selectedMovement ? 'opacity-50' : '' }}">
                         <label class="label-caps d-block">Tipo de Movimento</label>
                         <div class="btn-toggle-group">
-                            <input type="radio" class="btn-check" name="edit_tipo" id="edit_receita" value="receita" autocomplete="off"
-                                {{ $selectedMovement && $selectedMovement->tipo == 'receita' ? 'checked' : '' }} {{ !$selectedMovement ? 'disabled' : '' }}>
+                            <input type="radio" class="btn-check" name="edit_tipo" id="edit_receita" value="receita"
+                                autocomplete="off"
+                                {{ $selectedMovement && $selectedMovement->tipo == 'receita' ? 'checked' : '' }}
+                                {{ !$selectedMovement ? 'disabled' : '' }}>
                             <label class="btn-toggle-item" for="edit_receita">
                                 <i class="bi bi-graph-up-arrow"></i> Receita
                             </label>
 
-                            <input type="radio" class="btn-check" name="edit_tipo" id="edit_despesa" value="despesa" autocomplete="off"
-                                {{ ($selectedMovement && $selectedMovement->tipo == 'despesa') || !$selectedMovement ? 'checked' : '' }} {{ !$selectedMovement ? 'disabled' : '' }}>
+                            <input type="radio" class="btn-check" name="edit_tipo" id="edit_despesa" value="despesa"
+                                autocomplete="off"
+                                {{ ($selectedMovement && $selectedMovement->tipo == 'despesa') || !$selectedMovement ? 'checked' : '' }}
+                                {{ !$selectedMovement ? 'disabled' : '' }}>
                             <label class="btn-toggle-item" for="edit_despesa">
                                 <i class="bi bi-graph-down-arrow"></i> Despesa
                             </label>
@@ -48,8 +53,10 @@
                         <label class="label-caps d-block">Descrição</label>
                         <div class="position-relative">
                             <input type="text" class="form-control" id="edit_descricao" name="edit_descricao"
-                                value="{{ $selectedMovement ? $selectedMovement->descricao : '' }}" placeholder="Ex: Supermercado" {{ !$selectedMovement ? 'disabled' : '' }}>
-                            <i class="bi bi-pencil position-absolute top-50 end-0 translate-middle-y pe-3 text-secondary"></i>
+                                value="{{ $selectedMovement ? $selectedMovement->descricao : '' }}"
+                                placeholder="Ex: Supermercado" {{ !$selectedMovement ? 'disabled' : '' }}>
+                            <i
+                                class="bi bi-pencil position-absolute top-50 end-0 translate-middle-y pe-3 text-secondary"></i>
                         </div>
                     </div>
 
@@ -57,18 +64,23 @@
                         <div class="col-md-4">
                             <label class="label-caps d-block">Valor</label>
                             <div class="position-relative">
-                                <input type="number" step="0.01" class="form-control" id="edit_valor" name="edit_valor"
-                                    value="{{ $selectedMovement ? $selectedMovement->valor : '' }}" placeholder="0,00" {{ !$selectedMovement ? 'disabled' : '' }}>
-                                <i class="bi bi-currency-euro position-absolute top-50 end-0 translate-middle-y pe-3 text-secondary"></i>
+                                <input type="number" step="0.01" class="form-control" id="edit_valor"
+                                    name="edit_valor" value="{{ $selectedMovement ? $selectedMovement->valor : '' }}"
+                                    placeholder="0,00" {{ !$selectedMovement ? 'disabled' : '' }}>
+                                <i
+                                    class="bi bi-currency-euro position-absolute top-50 end-0 translate-middle-y pe-3 text-secondary"></i>
                             </div>
                         </div>
 
                         <div class="col-md-4">
                             <label class="label-caps d-block">Categoria</label>
-                            <select class="form-select" id="edit_categoria_id" name="edit_categoria_id" {{ !$selectedMovement ? 'disabled' : '' }}>
-                                <option disabled {{ !$selectedMovement ? 'selected' : '' }} value="">Selecione...</option>
-                                @foreach($categories as $category)
-                                    <option value="{{ $category->id }}" {{ $selectedMovement && $selectedMovement->categoria_id == $category->id ? 'selected' : '' }}>
+                            <select class="form-select" id="edit_categoria_id" name="edit_categoria_id"
+                                {{ !$selectedMovement ? 'disabled' : '' }}>
+                                <option disabled {{ !$selectedMovement ? 'selected' : '' }} value="">Selecione...
+                                </option>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}"
+                                        {{ $selectedMovement && $selectedMovement->categoria_id == $category->id ? 'selected' : '' }}>
                                         {{ $category->nome }}
                                     </option>
                                 @endforeach
@@ -77,8 +89,10 @@
 
                         <div class="col-md-4">
                             <label class="label-caps d-block">Data</label>
-                            <input type="date" class="form-control" id="edit_data" name="edit_data" style="color-scheme: dark;"
-                                value="{{ $selectedMovement ? $selectedMovement->data->format('Y-m-d') : '' }}" {{ !$selectedMovement ? 'disabled' : '' }}>
+                            <input type="date" class="form-control" id="edit_data" name="edit_data"
+                                style="color-scheme: dark;"
+                                value="{{ $selectedMovement ? $selectedMovement->data->format('Y-m-d') : '' }}"
+                                {{ !$selectedMovement ? 'disabled' : '' }}>
                         </div>
                     </div>
 
@@ -86,7 +100,9 @@
                         <button type="button" class="btn btn-cancel-custom" data-bs-dismiss="modal">
                             Cancelar
                         </button>
-                        <button type="submit" class="btn btn-primary-custom ms-sm-auto d-flex align-items-center justify-content-center gap-2" {{ !$selectedMovement ? 'disabled' : '' }}>
+                        <button type="submit"
+                            class="btn btn-primary-custom ms-sm-auto d-flex align-items-center justify-content-center gap-2"
+                            {{ !$selectedMovement ? 'disabled' : '' }}>
                             <i class="bi bi-check2-circle fs-5"></i>
                             Salvar Alteração
                         </button>
@@ -100,13 +116,14 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const searchInput = document.getElementById('editMovementSearch');
-        const movements = @json($movements->items());
+        const movements = @json($allMovements ?? $movements);
         const form = document.getElementById('editMovementForm');
 
         searchInput.addEventListener('input', function() {
             const val = this.value;
             const movement = movements.find(m => {
-                const searchStr = `${m.descricao} - ${new Intl.NumberFormat('pt-PT', { minimumFractionDigits: 2 }).format(m.valor)}€`;
+                const searchStr =
+                    `${m.descricao} - R$ ${new Intl.NumberFormat('pt-PT', { minimumFractionDigits: 2 }).format(m.valor)}`;
                 return searchStr === val;
             });
 

@@ -2,11 +2,10 @@
 <div class="modal fade" id="createMovementModal" tabindex="-1" aria-labelledby="createMovementModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content bg-surface border-custom text-white" style="border-radius: 1rem;">
+        <div class="modal-content bg-surface border-custom" style="border-radius: 1rem;">
             <div class="modal-header border-bottom border-custom">
                 <h1 class="modal-title fs-5 fw-bold" id="createMovementModalLabel">Adicionar Movimento</h1>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                    aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body p-4 p-md-5">
                 <form action="{{ route('movements.store') }}" method="POST">
