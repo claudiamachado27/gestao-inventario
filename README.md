@@ -1,6 +1,6 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img width="196" height="52" alt="Logo" src="https://github.com/claudiamachado27/gestao-inventario/blob/main/public/images/logo.png" />
 
-# 💰 Gestão do Inventário 
+# 💰 Gestão de Inventário (Partilha de Bens)
 
 Sistema premium de gestão de inventário desenvolvido em **Laravel**, focado na simplicidade, eficiência e uma experiência de utilizador moderna.
 
@@ -32,7 +32,7 @@ Este sistema foi transformado recentemente com uma nova identidade visual **Ligh
 
 ## 🛠️ Tecnologias Utilizadas
 
-- **Backend:** Laravel 10 (PHP 8.1+)
+- **Backend:** Laravel 11 (PHP 8.4)
 - **Frontend:** Blade Templates, Bootstrap 5, CSS3 (Custom Design)
 - **Ícones:** Bootstrap Icons
 - **Tipografia:** Google Fonts (Inter)
@@ -43,7 +43,7 @@ Este sistema foi transformado recentemente com uma nova identidade visual **Ligh
 ## 📋 Como Instalar e Rodar
 
 ### Pré-requisitos
-- PHP >= 8.1
+- PHP = 8.4
 - Composer
 - Node.js & NPM
 - Servidor de base de dados (MySQL ou compatível)
