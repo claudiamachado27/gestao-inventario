@@ -1,3 +1,5 @@
+<p align="center"><a href="https://laravel.com" target="_blank"><img width="196" height="52" alt="Logo" src="https://github.com/claudiamachado27/gestao-inventario/blob/main/public/images/logo.png" />
+
 # 💰 Gestão do Inventário 
 
 Sistema premium de gestão de inventário desenvolvido em **Laravel**, focado na simplicidade, eficiência e uma experiência de utilizador moderna.
