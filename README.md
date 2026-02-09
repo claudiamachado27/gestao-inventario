@@ -50,8 +50,8 @@ Este sistema foi transformado recentemente com uma nova identidade visual **Ligh
 
 1. **Clone o repositório:**
    ```bash
-   git clone [url-do-repositorio]
-   cd InventarioAlice
+   git clone https://github.com/claudiamachado27/gestao-inventario.git
+   cd Inventario
    ```
 
 2. **Instale as dependências:**
