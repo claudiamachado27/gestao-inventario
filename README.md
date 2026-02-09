@@ -1,4 +1,5 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img width="196" height="52" alt="Logo" src="https://github.com/claudiamachado27/gesrest/blob/main/src/assets/logogesrest.png" />
+<p align="center"><a href="https://laravel.com" target="_blank"><img width="196" height="52" alt="Logo" src="https://github.com/claudiamachado27/gestao-inventario/blob/main/public/images/logo.png" />
+
 
 # 💰 Gestão de Inventário (Partilha de Bens)
 
