@@ -1,6 +1,6 @@
-# 💰 Gestão do Inventário - Alice Teixeira
+# 💰 Gestão do Inventário 
 
-Sistema premium de gestão financeira pessoal desenvolvido em **Laravel**, focado na simplicidade, eficiência e uma experiência de utilizador moderna.
+Sistema premium de gestão de inventário desenvolvido em **Laravel**, focado na simplicidade, eficiência e uma experiência de utilizador moderna.
 
 ![Laravel](https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)
 ![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)
